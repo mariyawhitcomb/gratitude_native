@@ -5,12 +5,14 @@ import { Button } from "../components/common/";
 export default class LoggedIn extends Component {
   constructor(props) {
     super(props);
+    console.log("loggedIn screen");
+    console.log(this.props.deleteJWT);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button>Log Out</Button>
+        <Button onPress={this.props.deleteJWT}>Log Out</Button>
       </View>
     );
   }
