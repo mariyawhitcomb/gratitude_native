@@ -7,13 +7,20 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      jwt: ""
+      jwt: "",
+      loading: true
     };
+    this.newJWT = this.newJWT.bind(this);
   }
-
+  newJWT(jwt) {
+    this.setState({
+      jwt: jwt
+    });
+  }
   render() {
+    console.log(this.state.jwt);
     if (!this.state.jwt) {
-      return <Auth />;
+      return <Auth newJWT={this.newJWT} />;
     } else if (this.state.jwt) {
       return <LoggedIn />;
     }

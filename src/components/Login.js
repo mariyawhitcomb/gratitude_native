@@ -1,20 +1,47 @@
 import React, { Component, Fragment } from "react";
 import { Text, View } from "react-native";
 import { Input, TextLink, Loading, Button } from "./common";
+import axios from "axios";
+import deviceStorage from "../services/deviceStorage";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      username: "",
       password: "",
       error: "",
       loading: false
     };
   }
+  loginUser = () => {
+    this.URL = "http://localhost:8000/token-auth/";
+    const { username, password } = this.state;
+    this.setState({ error: "", loading: true });
+    axios
+      .post(this.URL, {
+        username: username,
+        password: password
+      })
+      .then(response => {
+        console.log(response);
+        deviceStorage.saveItem("id_token", response.data.token);
+        this.props.newJWT(response.data.token);
+      })
+      .catch(error => {
+        console.log(error);
+        this.onLoginFail();
+      });
+  };
+  onLoginFail = () => {
+    this.setState({
+      error: "Login Failed",
+      loading: false
+    });
+  };
 
   render() {
-    const { email, password, error, loading } = this.state;
+    const { username, password, error, loading } = this.state;
     const { form, section, errorTextStyle } = styles;
 
     return (
@@ -22,10 +49,10 @@ class Login extends Component {
         <View style={form}>
           <View style={section}>
             <Input
-              placeholder="user@email.com"
-              label="Email"
-              value={email}
-              onChangeText={email => this.setState({ email })}
+              placeholder="username"
+              label="username"
+              value={username}
+              onChangeText={username => this.setState({ username })}
             />
           </View>
 
@@ -33,7 +60,7 @@ class Login extends Component {
             <Input
               secureTextEntry
               placeholder="password"
-              label="Password"
+              label="password"
               value={password}
               onChangeText={password => this.setState({ password })}
             />
@@ -41,7 +68,11 @@ class Login extends Component {
 
           <Text style={errorTextStyle}>{error}</Text>
 
-          {!loading ? <Button>Login</Button> : <Loading size={"large"} />}
+          {!loading ? (
+            <Button onPress={this.loginUser}>Login</Button>
+          ) : (
+            <Loading size={"large"} />
+          )}
         </View>
         <TextLink onPress={this.props.authSwitch}>
           Don't have an account? Register!

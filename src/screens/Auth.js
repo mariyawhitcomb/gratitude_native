@@ -21,9 +21,11 @@ export default class Auth extends Component {
   }
   whichForm() {
     if (this.state.showLogin) {
-      return <Login authSwitch={this.authSwitch} />;
+      return <Login authSwitch={this.authSwitch} newJWT={this.props.newJWT} />;
     } else {
-      return <Registration authSwitch={this.authSwitch} />;
+      return (
+        <Registration authSwitch={this.authSwitch} newJWT={this.props.newJWT} />
+      );
     }
   }
   render() {
