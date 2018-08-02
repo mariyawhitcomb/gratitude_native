@@ -29,7 +29,11 @@ class Registration extends Component {
       .then(response => {
         console.log(response);
         deviceStorage.saveItem("id_token", response.data.token);
-        this.props.newJWT(response.data.token);
+        deviceStorage.saveItem("user_id", response.data.user.id.toString());
+        this.props.newJWT(
+          response.data.token,
+          response.data.user.id.toString()
+        );
       })
       .catch(error => {
         console.log(error);

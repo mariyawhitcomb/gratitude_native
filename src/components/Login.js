@@ -25,7 +25,10 @@ class Login extends Component {
       })
       .then(response => {
         console.log(response);
+
         deviceStorage.saveItem("id_token", response.data.token);
+        deviceStorage.saveItem("user_id", response.data.user.id.toString());
+        this.props.newId(response.data.user.id.toString());
         this.props.newJWT(response.data.token);
       })
       .catch(error => {
