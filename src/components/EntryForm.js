@@ -75,9 +75,12 @@ export default class EntryForm extends Component {
       return (
         <View style={form}>
           <View style={section}>
+            <Text>I am Grateful because:</Text>
+          </View>
+          <View style={section}>
             <Input
               placeholder="Reason #1"
-              label="reason1"
+              label="Reason #1"
               value={reason1}
               onChangeText={reason1 => this.setState({ reason1 })}
             />
@@ -85,7 +88,7 @@ export default class EntryForm extends Component {
           <View style={section}>
             <Input
               placeholder="Reason #2"
-              label="reason2"
+              label="Reason #2"
               value={reason2}
               onChangeText={reason2 => this.setState({ reason2 })}
             />
@@ -93,7 +96,7 @@ export default class EntryForm extends Component {
           <View style={section}>
             <Input
               placeholder="Reason #3"
-              label="reason3"
+              label="Reason #3"
               value={reason3}
               onChangeText={reason3 => this.setState({ reason3 })}
             />
@@ -101,7 +104,8 @@ export default class EntryForm extends Component {
           <View style={section}>
             <Input
               placeholder="Your goal for today"
-              label="goal"
+              multiline
+              label="Goal"
               value={goal}
               onChangeText={goal => this.setState({ goal })}
             />
