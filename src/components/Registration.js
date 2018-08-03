@@ -18,7 +18,7 @@ class Registration extends Component {
   }
   registerUser = () => {
     this.URL = "http://localhost:8000/gratitude/users/";
-    const { email, password, password_confirmation, username } = this.state;
+    const { password, username } = this.state;
 
     this.setState({ error: "", loading: true });
     axios
@@ -29,11 +29,9 @@ class Registration extends Component {
       .then(response => {
         console.log(response);
         deviceStorage.saveItem("id_token", response.data.token);
-        deviceStorage.saveItem("user_id", response.data.user.id.toString());
-        this.props.newJWT(
-          response.data.token,
-          response.data.user.id.toString()
-        );
+        deviceStorage.saveItem("user_id", response.data.id.toString());
+        this.props.newId(response.data.id.toString());
+        this.props.newJWT(response.data.token);
       })
       .catch(error => {
         console.log(error);

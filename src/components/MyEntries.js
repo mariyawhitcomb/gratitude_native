@@ -4,6 +4,7 @@ import { Button } from "../components/common/Button";
 import navigation from "../screens/LoggedIn";
 import { createStackNavigator } from "react-navigation";
 import axios from "axios";
+import { TextLink } from "../components/common/TextLink";
 
 export default class MyEntries extends Component {
   constructor(props) {
@@ -30,8 +31,8 @@ export default class MyEntries extends Component {
   render() {
     const entries = this.state.data.map(entry => {
       return (
-        <View>
-          <Text>Date {entry.date}</Text>
+        <View style={styles.containerStyle}>
+          <TextLink>{entry.date}</TextLink>
           <Text>Reason #1 {entry.reason1}</Text>
           <Text>Reason #2 {entry.reason2}</Text>
           <Text>Reason #3 {entry.reason3}</Text>
@@ -39,15 +40,22 @@ export default class MyEntries extends Component {
         </View>
       );
     });
-    return <View>{entries}</View>;
+    return (
+      <View>
+        <Button onPress={this.props.leaveScreen}>Go back</Button>
+        {entries}
+      </View>
+    );
   }
 }
 const styles = {
   containerStyle: {
-    height: 40,
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center"
+    // flex: 1,
+    flexDirection: "column",
+    alignItems: "flex-start",
+    marginLeft: 30,
+    flexWrap: "wrap",
+    border: 1
   },
   labelStyle: {
     fontSize: 16,

@@ -46,9 +46,7 @@ export default class EntryForm extends Component {
         console.log(response);
       })
       .then(() => {
-        this.setState({
-          myEntries: true
-        });
+        this.props.myEntries();
       })
       .catch(error => {
         console.log(error);
@@ -117,6 +115,7 @@ export default class EntryForm extends Component {
           ) : (
             <Loading size={"large"} />
           )}
+          <Button onPress={this.props.leaveScreen}>Go back</Button>
         </View>
       );
     }

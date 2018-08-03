@@ -16,6 +16,12 @@ export default class LoggedIn extends Component {
       myEntries: false
     };
   }
+  leaveScreen = () => {
+    this.setState({
+      newEntry: false,
+      myEntries: false
+    });
+  };
   logout = () => {
     this.props.deleteJWT();
     this.props.deleteId();
@@ -28,7 +34,8 @@ export default class LoggedIn extends Component {
   };
   myEntries = () => {
     this.setState({
-      myEntries: true
+      myEntries: true,
+      newEntry: false
     });
   };
   render() {
@@ -37,13 +44,24 @@ export default class LoggedIn extends Component {
     if (this.state.newEntry) {
       return (
         <View>
-          <EntryForm jwt={this.props.jwt} user_id={this.props.user_id} />
+          <EntryForm
+            jwt={this.props.jwt}
+            user_id={this.props.user_id}
+            logout={this.logout}
+            leaveScreen={this.leaveScreen}
+            myEntries={this.myEntries}
+          />
         </View>
       );
     } else if (this.state.myEntries) {
       return (
         <View>
-          <MyEntries jwt={this.props.jwt} user_id={this.props.user_id} />
+          <MyEntries
+            jwt={this.props.jwt}
+            user_id={this.props.user_id}
+            logout={this.logout}
+            leaveScreen={this.leaveScreen}
+          />
         </View>
       );
     } else {

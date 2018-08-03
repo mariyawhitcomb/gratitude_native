@@ -12,14 +12,14 @@ export default class Auth extends Component {
     this.whichForm = this.whichForm.bind(this);
     this.authSwitch = this.authSwitch.bind(this);
   }
-  authSwitch() {
+  authSwitch = () => {
     if (this.state.showLogin == false) {
       this.setState({ showLogin: true });
     } else {
       this.setState({ showLogin: false });
     }
-  }
-  whichForm() {
+  };
+  whichForm = () => {
     if (this.state.showLogin) {
       return (
         <Login
@@ -37,7 +37,7 @@ export default class Auth extends Component {
         />
       );
     }
-  }
+  };
   render() {
     return <View style={styles.container}>{this.whichForm()}</View>;
   }
