@@ -63,7 +63,7 @@ export default class EntryForm extends Component {
   };
   render() {
     const { reason1, reason2, reason3, goal, error, loading } = this.state;
-    const { form, section, errorTextStyle, text, imageStyle } = styles;
+    const { form, section, errorTextStyle, text, imageStyle, empty } = styles;
     if (this.state.myEntries) {
       return (
         <View>
@@ -73,7 +73,7 @@ export default class EntryForm extends Component {
     } else {
       return (
         <ImageBackground
-          source={require("../components/common/img/heart.jpg")}
+          source={require("../components/common/img/cactus.jpg")}
           style={imageStyle}
         >
           <View style={form}>
@@ -121,6 +121,7 @@ export default class EntryForm extends Component {
               <Loading size={"large"} />
             )}
             <Button onPress={this.props.leaveScreen}>Go back</Button>
+            <View style={empty} />
           </View>
         </ImageBackground>
       );
@@ -138,7 +139,7 @@ const styles = {
   section: {
     flexDirection: "row",
     borderBottomWidth: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffffff05",
     opacity: 0.8,
     borderColor: "#ddd",
     justifyContent: "center",
@@ -158,6 +159,9 @@ const styles = {
     fontSize: 20
   },
   imageStyle: {
-    resizeMode: "cover"
+    resizeMode: "contain"
+  },
+  empty: {
+    height: 200
   }
 };

@@ -15,7 +15,7 @@ const TextLink = ({ onPress, children }) => {
 const styles = {
   text: {
     alignSelf: "center",
-    color: "blue",
+    color: "#9dc173",
     fontSize: 18,
     fontWeight: "700",
     textDecorationLine: "underline",

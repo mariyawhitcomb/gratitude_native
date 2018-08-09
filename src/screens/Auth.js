@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, ImageBackground } from "react-native";
 import { Registration } from "../components/Registration";
 import { Login } from "../components/Login";
 
@@ -39,7 +39,14 @@ export default class Auth extends Component {
     }
   };
   render() {
-    return <View style={styles.container}>{this.whichForm()}</View>;
+    return (
+      <ImageBackground
+        source={require("../components/common/img/cactus.jpg")}
+        style={styles.background}
+      >
+        <View style={styles.container}>{this.whichForm()}</View>
+      </ImageBackground>
+    );
   }
 }
 
@@ -48,5 +55,9 @@ const styles = {
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  background: {
+    resizeMode: "contain",
+    height: "100%"
   }
 };
