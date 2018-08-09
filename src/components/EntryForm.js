@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from "react";
-import { Text, View } from "react-native";
+import { Text, View, ImageBackground } from "react-native";
 import axios from "axios";
 import { Input, TextLink, Loading, Button } from "./common";
 import List from "./List";
 import deviceStorage from "../services/deviceStorage";
 import MyEntries from "./MyEntries";
+import FormImage from "./common/FormImage";
 
 export default class EntryForm extends Component {
   constructor(props) {
@@ -62,7 +63,7 @@ export default class EntryForm extends Component {
   };
   render() {
     const { reason1, reason2, reason3, goal, error, loading } = this.state;
-    const { form, section, errorTextStyle, container } = styles;
+    const { form, section, errorTextStyle, text, imageStyle } = styles;
     if (this.state.myEntries) {
       return (
         <View>
@@ -71,52 +72,57 @@ export default class EntryForm extends Component {
       );
     } else {
       return (
-        <View style={form}>
-          <View style={section}>
-            <Text>I am Grateful because:</Text>
-          </View>
-          <View style={section}>
-            <Input
-              placeholder="Reason #1"
-              label="Reason #1"
-              value={reason1}
-              onChangeText={reason1 => this.setState({ reason1 })}
-            />
-          </View>
-          <View style={section}>
-            <Input
-              placeholder="Reason #2"
-              label="Reason #2"
-              value={reason2}
-              onChangeText={reason2 => this.setState({ reason2 })}
-            />
-          </View>
-          <View style={section}>
-            <Input
-              placeholder="Reason #3"
-              label="Reason #3"
-              value={reason3}
-              onChangeText={reason3 => this.setState({ reason3 })}
-            />
-          </View>
-          <View style={section}>
-            <Input
-              placeholder="Your goal for today"
-              multiline
-              label="Goal"
-              value={goal}
-              onChangeText={goal => this.setState({ goal })}
-            />
-          </View>
-          <Text style={errorTextStyle}>{error}</Text>
+        <ImageBackground
+          source={require("../components/common/img/heart.jpg")}
+          style={imageStyle}
+        >
+          <View style={form}>
+            <View style={section}>
+              <Text style={text}>I am Grateful because:</Text>
+            </View>
+            <View style={section}>
+              <Input
+                placeholder="Reason #1"
+                label="Reason #1"
+                value={reason1}
+                onChangeText={reason1 => this.setState({ reason1 })}
+              />
+            </View>
+            <View style={section}>
+              <Input
+                placeholder="Reason #2"
+                label="Reason #2"
+                value={reason2}
+                onChangeText={reason2 => this.setState({ reason2 })}
+              />
+            </View>
+            <View style={section}>
+              <Input
+                placeholder="Reason #3"
+                label="Reason #3"
+                value={reason3}
+                onChangeText={reason3 => this.setState({ reason3 })}
+              />
+            </View>
+            <View style={section}>
+              <Input
+                placeholder="Your goal for today"
+                multiline
+                label="Goal"
+                value={goal}
+                onChangeText={goal => this.setState({ goal })}
+              />
+            </View>
+            <Text style={errorTextStyle}>{error}</Text>
 
-          {!loading ? (
-            <Button onPress={this.createEntry}>Submit</Button>
-          ) : (
-            <Loading size={"large"} />
-          )}
-          <Button onPress={this.props.leaveScreen}>Go back</Button>
-        </View>
+            {!loading ? (
+              <Button onPress={this.createEntry}>Submit</Button>
+            ) : (
+              <Loading size={"large"} />
+            )}
+            <Button onPress={this.props.leaveScreen}>Go back</Button>
+          </View>
+        </ImageBackground>
       );
     }
   }
@@ -124,6 +130,7 @@ export default class EntryForm extends Component {
 const styles = {
   form: {
     width: "100%",
+    height: "100%",
     borderTopWidth: 1,
     borderColor: "#ddd",
     justifyContent: "center"
@@ -132,7 +139,11 @@ const styles = {
     flexDirection: "row",
     borderBottomWidth: 1,
     backgroundColor: "#fff",
-    borderColor: "#ddd"
+    opacity: 0.8,
+    borderColor: "#ddd",
+    justifyContent: "center",
+    marginTop: 10,
+    borderRadius: 10
   },
   errorTextStyle: {
     alignSelf: "center",
@@ -142,5 +153,11 @@ const styles = {
   container: {
     flex: 1,
     justifyContent: "center"
+  },
+  text: {
+    fontSize: 20
+  },
+  imageStyle: {
+    resizeMode: "cover"
   }
 };
