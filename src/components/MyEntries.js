@@ -160,48 +160,61 @@ export default class MyEntries extends Component {
         source={require("../components/common/img/cactus.jpg")}
         style={styles.imageStyle}
       >
-        <Button onPress={this.props.leaveScreen}>Go back</Button>
-        <List containerStyle={{ borderTopWidth: 0, borderBottomWidth: 0 }}>
+        <List
+          containerStyle={{
+            borderTopWidth: 0,
+            borderBottomWidth: 0,
+            backgroundColor: "#ffffff00",
+            height: "60%"
+          }}
+        >
           <FlatList
             data={this.state.data}
             renderItem={() =>
               this.state.data.map((entry, index) => {
-                <ListItem
-                  //   onPress={() =>
-                  //     this.props.navigation.navigate("Detail", {
-                  //       name: `${entry.name}`,
-                  //       menu: `${entry.menu}`,
-                  //       img: `${this.state.base_url}${item.photo}`,
-                  //       address: `${item.address}`
-                  //     })
-                  //   }
+                return (
+                  <ListItem
+                    key={index}
+                    onPress={
+                      () => console.log("pressed")
+                      // this.props.navigation.navigate("Detail", {
+                      //   name: `${entry.name}`,
+                      //   entry: `${entry.entry}`,
+                      //   img: `${this.state.base_url}${item.photo}`,
+                      //   address: `${item.address}`
+                      // })
+                    }
+                    title={entry.date}
+                    titleStyle={{ fontSize: 16 }}
+                    titleContainerStyle={{ marginLeft: 120 }}
+                    // subtitle={
+                    //   <View style={styles.subtitleView}>
+                    //     <Text style={styles.entryText}>
+                    //       Reason #1 {entry.reason1}
+                    //     </Text>
+                    //     <Text style={styles.entryText}>
+                    //       Reason #2 {entry.reason2}
+                    //     </Text>
+                    //     <Text style={styles.entryText}>
+                    //       Reason #3 {entry.reason3}
+                    //     </Text>
 
-                  title={`${entry.name}`}
-                  titleStyle={{ fontSize: 16 }}
-                  titleContainerStyle={{ marginLeft: 120 }}
-                  subtitle={
-                    <View style={styles.subtitleView}>
-                      <Text style={styles.menuText}>
-                        Reason #1 {entry.reason1}
-                      </Text>
-                      <Text style={styles.menuText}>
-                        Reason #2 {entry.reason2}
-                      </Text>
-                      <Text style={styles.menuText}>
-                        Reason #3 {entry.reason3}
-                      </Text>
-
-                      <Text style={styles.locText}>Goal {entry.goal}</Text>
-                    </View>
-                  }
-                  containerStyle={{ borderBottomWidth: 0, marginBottom: 20 }}
-                />;
+                    //     <Text style={styles.locText}>Goal {entry.goal}</Text>
+                    //   </View>
+                    // }
+                    containerStyle={{
+                      borderBottomWidth: 1,
+                      marginBottom: 20
+                    }}
+                  />
+                );
               })
             }
             keyExtractor={entry => entry.id}
-            ItemSeparatorComponent={this.renderSeparator}
+            // ItemSeparatorComponent={this.renderSeparator}
           />
         </List>
+        <Button onPress={this.props.leaveScreen}>Go back</Button>
       </ImageBackground>
     );
   }
@@ -244,7 +257,7 @@ const styles = {
     paddingTop: 5,
     marginLeft: 110
   },
-  menuText: {
+  entryText: {
     paddingLeft: 10,
     color: "grey"
   },
