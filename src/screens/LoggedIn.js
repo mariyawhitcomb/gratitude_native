@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View, ImageBackground } from "react-native";
 import { Button, TextLink } from "../components/common/";
 import { createStackNavigator } from "react-navigation";
 import EntryForm from "../components/EntryForm";
@@ -39,8 +39,6 @@ export default class LoggedIn extends Component {
     });
   };
   render() {
-    console.log(`JWT in logged in ${this.props.jwt}`);
-    console.log(`ID in logged in ${this.props.user_id}`);
     if (this.state.newEntry) {
       return (
         <View>
@@ -66,11 +64,16 @@ export default class LoggedIn extends Component {
       );
     } else {
       return (
-        <View style={styles.container}>
-          <Button onPress={this.newEntry}>Create new Entry</Button>
-          <Button onPress={this.myEntries}>Go to my Entries</Button>
-          <Button onPress={this.logout}>Log Out</Button>
-        </View>
+        <ImageBackground
+          source={require("../components/common/img/cactus.jpg")}
+          style={styles.imageStyle}
+        >
+          <View style={styles.container}>
+            <Button onPress={this.newEntry}>Create new Entry</Button>
+            <Button onPress={this.myEntries}>Go to my Entries</Button>
+            <Button onPress={this.logout}>Log Out</Button>
+          </View>
+        </ImageBackground>
       );
     }
   }
@@ -80,5 +83,9 @@ const styles = {
   container: {
     flex: 1,
     justifyContent: "center"
+  },
+  imageStyle: {
+    resizeMode: "contain",
+    height: "100%"
   }
 };

@@ -78,7 +78,7 @@ export default class EntryForm extends Component {
         >
           <View style={form}>
             <View style={section}>
-              <Text style={text}>I am Grateful because:</Text>
+              <Text style={text}>TODAY I AM GRATEFUL:</Text>
             </View>
             <View style={section}>
               <Input
@@ -156,7 +156,9 @@ const styles = {
     justifyContent: "center"
   },
   text: {
-    fontSize: 20
+    fontSize: 20,
+    height: 40,
+    justifyContent: "center"
   },
   imageStyle: {
     resizeMode: "contain"

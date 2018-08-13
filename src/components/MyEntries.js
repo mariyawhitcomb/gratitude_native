@@ -1,5 +1,11 @@
 import React, { Component } from "react";
-import { Text, View } from "react-native";
+import {
+  Text,
+  View,
+  ImageBackground,
+  ScrollView,
+  FlatList
+} from "react-native";
 import { Button } from "../components/common/Button";
 import navigation from "../screens/LoggedIn";
 import { createStackNavigator } from "react-navigation";
@@ -29,22 +35,32 @@ export default class MyEntries extends Component {
   }
 
   render() {
-    const entries = this.state.data.map(entry => {
-      return (
-        <View style={styles.containerStyle}>
-          <TextLink>{entry.date}</TextLink>
-          <Text>Reason #1 {entry.reason1}</Text>
-          <Text>Reason #2 {entry.reason2}</Text>
-          <Text>Reason #3 {entry.reason3}</Text>
-          <Text>Goal {entry.goal}</Text>
-        </View>
-      );
-    });
+    console.log(this.state.data);
     return (
-      <View>
+      <ImageBackground
+        source={require("../components/common/img/cactus.jpg")}
+        style={styles.imageStyle}
+      >
+        {/* <View> */}
         <Button onPress={this.props.leaveScreen}>Go back</Button>
-        {entries}
-      </View>
+        <FlatList
+          data={this.state.data}
+          renderItem={() =>
+            this.state.data.map(entry => {
+              return (
+                <View style={styles.containerStyle}>
+                  <TextLink>{entry.date}</TextLink>
+                  <Text>Reason #1 {entry.reason1}</Text>
+                  <Text>Reason #2 {entry.reason2}</Text>
+                  <Text>Reason #3 {entry.reason3}</Text>
+                  <Text>Goal {entry.goal}</Text>
+                </View>
+              );
+            })
+          }
+        />
+        {/* </View> */}
+      </ImageBackground>
     );
   }
 }
@@ -69,5 +85,9 @@ const styles = {
     fontSize: 18,
     lineHeight: 23,
     flex: 3
+  },
+  imageStyle: {
+    resizeMode: "contain",
+    height: "100%"
   }
 };

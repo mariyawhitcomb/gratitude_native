@@ -36,6 +36,7 @@ export default class Home extends Component {
     });
   };
   render() {
+    console.log(this.state.jwt);
     if (this.state.loading) {
       return <Loading size={"large"} />;
     } else if (!this.state.jwt) {
