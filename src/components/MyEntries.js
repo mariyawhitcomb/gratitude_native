@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  ImageBackground,
-  ScrollView,
-  FlatList
-} from "react-native";
+import { Text, View, ImageBackground, FlatList } from "react-native";
 import { Button } from "../components/common/Button";
 import { createStackNavigator } from "react-navigation";
 import axios from "axios";
@@ -15,6 +9,16 @@ import { StackNavigator } from "react-navigation";
 import { withNavigation } from "react-navigation";
 
 export default class MyEntries extends Component {
+  static navigationOptions = {
+    headerRight: (
+      <Button
+        onPress={() => alert("This is a button!")}
+        title="Info"
+        color="#fff"
+      />
+    )
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -92,7 +96,7 @@ export default class MyEntries extends Component {
             keyExtractor={item => item.id.toString()}
           />
         </List>
-        <Button onPress={this.props.leaveScreen}>Go back</Button>
+        {/* <Button onPress={this.props.leaveScreen}>Go back</Button> */}
       </ImageBackground>
     );
   }

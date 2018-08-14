@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { Text, View, ImageBackground } from "react-native";
 import axios from "axios";
-import { Input, TextLink, Loading, Button } from "./common";
-import List from "./List";
-import deviceStorage from "../services/deviceStorage";
-import MyEntries from "./MyEntries";
-import FormImage from "./common/FormImage";
+import { Input, Loading, Button } from "./common";
 
 export default class EntryForm extends Component {
+  static navigationOptions = {
+    header: {
+      visible: false
+    }
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -15,26 +16,14 @@ export default class EntryForm extends Component {
       reason2: "",
       reason3: "",
       goal: "",
-      author: null,
       error: "",
-      loading: false,
-      myEntries: false
+      loading: false
     };
   }
-  componentDidMount() {
-    console.log(`JWT in form ${this.props.jwt}`);
-    console.log(`ID in form ${this.props.user_id}`);
-  }
-
   createEntry = () => {
     this.URL = "http://localhost:8000/gratitude/entry/";
-    const { reason1, reason2, reason3, goal, author } = this.state;
-    this.setState({ error: "", loading: true });
-    var token = `jwt ${this.props.jwt}`;
-    // var headers = {
-    //   "Content-Type": "application / json",
-    //   authorization: token
-    // };
+    const { reason1, reason2, reason3, goal } = this.state;
+    this.setState({ error: "", loading: false });
     axios
       .post(this.URL, {
         reason1: reason1,
@@ -43,11 +32,8 @@ export default class EntryForm extends Component {
         goal: goal,
         author: this.props.user_id
       })
-      .then(response => {
-        console.log(response);
-      })
       .then(() => {
-        this.props.myEntries();
+        this.props.navigation.navigate("LoggedIn");
       })
       .catch(error => {
         console.log(error);
@@ -62,72 +48,65 @@ export default class EntryForm extends Component {
     });
   };
   render() {
+    console.log("props", this.props);
     const { reason1, reason2, reason3, goal, error, loading } = this.state;
     const { form, section, errorTextStyle, text, imageStyle, empty } = styles;
-    if (this.state.myEntries) {
-      return (
-        <View>
-          <MyEntries />
-        </View>
-      );
-    } else {
-      return (
-        <ImageBackground
-          source={require("../components/common/img/cactus.jpg")}
-          style={imageStyle}
-        >
-          <View style={form}>
-            <View style={section}>
-              <Text style={text}>TODAY I AM GRATEFUL:</Text>
-            </View>
-            <View style={section}>
-              <Input
-                placeholder="Reason #1"
-                label="Reason #1"
-                value={reason1}
-                onChangeText={reason1 => this.setState({ reason1 })}
-              />
-            </View>
-            <View style={section}>
-              <Input
-                placeholder="Reason #2"
-                label="Reason #2"
-                value={reason2}
-                onChangeText={reason2 => this.setState({ reason2 })}
-              />
-            </View>
-            <View style={section}>
-              <Input
-                placeholder="Reason #3"
-                label="Reason #3"
-                value={reason3}
-                onChangeText={reason3 => this.setState({ reason3 })}
-              />
-            </View>
-            <View style={section}>
-              <Input
-                placeholder="Your goal for today"
-                multiline
-                label="Goal"
-                value={goal}
-                onChangeText={goal => this.setState({ goal })}
-              />
-            </View>
-            <Text style={errorTextStyle}>{error}</Text>
-
-            {!loading ? (
-              <Button onPress={this.createEntry}>Submit</Button>
-            ) : (
-              <Loading size={"large"} />
-            )}
-            <Button onPress={this.props.leaveScreen}>Go back</Button>
-            <View style={empty} />
+    return (
+      <ImageBackground
+        source={require("../components/common/img/cactus.jpg")}
+        style={imageStyle}
+      >
+        <View style={form}>
+          <View style={section}>
+            <Text style={text}>TODAY I AM GRATEFUL:</Text>
           </View>
-        </ImageBackground>
-      );
-    }
+          <View style={section}>
+            <Input
+              placeholder="Reason #1"
+              label="Reason #1"
+              value={reason1}
+              onChangeText={reason1 => this.setState({ reason1 })}
+            />
+          </View>
+          <View style={section}>
+            <Input
+              placeholder="Reason #2"
+              label="Reason #2"
+              value={reason2}
+              onChangeText={reason2 => this.setState({ reason2 })}
+            />
+          </View>
+          <View style={section}>
+            <Input
+              placeholder="Reason #3"
+              label="Reason #3"
+              value={reason3}
+              onChangeText={reason3 => this.setState({ reason3 })}
+            />
+          </View>
+          <View style={section}>
+            <Input
+              placeholder="Your goal for today"
+              multiline
+              label="Goal"
+              value={goal}
+              onChangeText={goal => this.setState({ goal })}
+            />
+          </View>
+          <Text style={errorTextStyle}>{error}</Text>
+
+          {!loading ? (
+            <Button onPress={this.createEntry}>Submit</Button>
+          ) : (
+            <Loading size={"large"} />
+          )}
+          <View style={empty} />
+        </View>
+      </ImageBackground>
+    );
   }
 }
+
 const styles = {
   form: {
     width: "100%",
