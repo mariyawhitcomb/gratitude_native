@@ -1,24 +1,35 @@
 import React, { Component } from "react";
 import { View, ImageBackground } from "react-native";
 import { Button } from "../components/common/";
+import axios from "axios";
 
 export default class LoggedIn extends Component {
-  static navigationOptions = {
-    title: "Welcome to Gratitude",
-    header: {
-      visible: false
-    }
-  };
   constructor(props) {
     super(props);
+    this.state = {
+      quote: []
+    };
   }
+  componentDidMount() {
+    this.getQuote();
+  }
+
+  getQuote = () => {
+    const quoteUrl = "http://quotes.rest/qod.json?category=management";
+    axios
+      .get(quoteUrl)
+      .then(response => {
+        console.log("response", response);
+      })
+      .catch(error => console.log(error));
+  };
+
   logout = () => {
     this.props.deleteJWT();
     this.props.deleteId();
   };
   newEntry = () => {
     this.props.navigation.navigate("EntryForm");
-    // this.props.loadingFalse();
   };
   myEntries = () => {
     this.props.navigation.navigate("MyEntries");

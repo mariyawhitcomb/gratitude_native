@@ -16,14 +16,13 @@ export default class EntryForm extends Component {
       reason2: "",
       reason3: "",
       goal: "",
-      error: "",
-      loading: false
+      error: ""
     };
   }
   createEntry = () => {
     this.URL = "http://localhost:8000/gratitude/entry/";
     const { reason1, reason2, reason3, goal } = this.state;
-    this.setState({ error: "", loading: false });
+    this.setState({ error: "" });
     axios
       .post(this.URL, {
         reason1: reason1,
@@ -43,8 +42,7 @@ export default class EntryForm extends Component {
 
   createEntryFail = () => {
     this.setState({
-      error: "Creating Entry Failed",
-      loading: false
+      error: "Creating Entry Failed"
     });
   };
   render() {

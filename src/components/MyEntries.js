@@ -62,29 +62,25 @@ export default class MyEntries extends Component {
               <ListItem
                 onPress={() =>
                   this.props.navigation.navigate("Detail", {
-                    goal: `${item.goal}`
-                    //   entry: `${entry.entry}`,
-                    //   img: `${this.state.base_url}${item.photo}`,
-                    //   address: `${item.address}`
+                    // goal: `${item.goal}`
                   })
                 }
                 key={item.id}
                 title={item.date}
                 titleStyle={{ fontSize: 16 }}
-                titleContainerStyle={{ marginLeft: 120 }}
+                // titleContainerStyle={{ marginLeft: 120 }}
                 subtitle={
                   <View style={styles.subtitleView}>
                     <Text style={styles.entryText}>
-                      {index} Reason #1 {item.reason1}
+                      Reason #1: {item.reason1}
                     </Text>
                     <Text style={styles.entryText}>
-                      Reason #2 {item.reason2}
+                      Reason #2: {item.reason2}
                     </Text>
                     <Text style={styles.entryText}>
-                      Reason #3 {item.reason3}
+                      Reason #3: {item.reason3}
                     </Text>
-
-                    <Text style={styles.locText}>Goal {item.goal}</Text>
+                    <Text style={styles.entryText}>Goal: {item.goal}</Text>
                   </View>
                 }
                 containerStyle={{
@@ -96,7 +92,6 @@ export default class MyEntries extends Component {
             keyExtractor={item => item.id.toString()}
           />
         </List>
-        {/* <Button onPress={this.props.leaveScreen}>Go back</Button> */}
       </ImageBackground>
     );
   }
@@ -106,7 +101,7 @@ const styles = {
     flex: 1,
     flexDirection: "column",
     alignItems: "flex-start",
-    marginLeft: 30,
+    // marginLeft: 30,
     flexWrap: "wrap",
     border: 1
   },
@@ -130,24 +125,19 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: "flex-start",
+    justifyContent: "flex-start"
   },
   subtitleView: {
     flexDirection: "column",
     paddingLeft: 10,
-    paddingTop: 5,
-    marginLeft: 110
+    paddingTop: 5
+    // marginLeft: 110
   },
   entryText: {
-    paddingLeft: 10,
-    color: "grey"
-  },
-  locText: {
-    paddingLeft: 10,
-    color: "grey",
-    marginTop: 6,
-    fontSize: 12
+    paddingLeft: 20,
+    color: "black"
+    // fontWeight: "bold"
   },
   titleText: {
     fontWeight: "bold"

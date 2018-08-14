@@ -35,11 +35,6 @@ export default class App extends Component {
       user_id: id
     });
   };
-  loadingFalse = () => {
-    this.setState({
-      loading: false
-    });
-  };
   render() {
     const Routes = createStackNavigator({
       Home: {
