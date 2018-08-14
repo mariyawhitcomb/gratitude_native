@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Loading } from "./components/common/";
 import Auth from "./screens/Auth";
 import LoggedIn from "./screens/LoggedIn";
 import deviceStorage from "./services/deviceStorage";
@@ -8,7 +7,6 @@ import EntryForm from "./components/EntryForm";
 import MyEntries from "./components/MyEntries";
 import Home from "./Home";
 import EntryDetail from "./components/EntryDetail";
-import { Button } from "react-native";
 
 export default class App extends Component {
   constructor() {
@@ -22,8 +20,8 @@ export default class App extends Component {
     this.deleteId = deviceStorage.deleteId.bind(this);
     this.loadJWT = deviceStorage.loadJWT.bind(this);
     this.loadId = deviceStorage.loadId.bind(this);
-    // this.loadId();
-    // this.loadJWT();
+    this.loadId();
+    this.loadJWT();
   }
   newJWT = jwt => {
     this.setState({

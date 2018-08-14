@@ -10,19 +10,6 @@ export default class LoggedIn extends Component {
       quote: []
     };
   }
-  componentDidMount() {
-    this.getQuote();
-  }
-
-  getQuote = () => {
-    const quoteUrl = "http://quotes.rest/qod.json?category=management";
-    axios
-      .get(quoteUrl)
-      .then(response => {
-        console.log("response", response);
-      })
-      .catch(error => console.log(error));
-  };
 
   logout = () => {
     this.props.deleteJWT();
