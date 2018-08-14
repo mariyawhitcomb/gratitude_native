@@ -57,15 +57,12 @@ export default class MyEntries extends Component {
             renderItem={({ index, item }) => (
               <ListItem
                 onPress={() =>
-                  this.props.navigation.navigate(
-                    "Detail"
-                    // , {
-                    //   name: `${entry.name}`,
+                  this.props.navigation.navigate("Detail", {
+                    goal: `${item.goal}`
                     //   entry: `${entry.entry}`,
                     //   img: `${this.state.base_url}${item.photo}`,
                     //   address: `${item.address}`
-                    // }
-                  )
+                  })
                 }
                 key={item.id}
                 title={item.date}

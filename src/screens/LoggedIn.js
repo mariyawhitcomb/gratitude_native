@@ -27,11 +27,11 @@ export default class LoggedIn extends Component {
     this.props.deleteId();
   };
   newEntry = () => {
-    // this.setState({
-    //   newEntry: true
-    // });
-    // console.log("new entry pressed");
-    this.props.navigation.navigate("EntryForm");
+    this.setState({
+      newEntry: true
+    });
+    console.log("new entry pressed");
+    // this.props.navigation.navigate("EntryForm");
   };
   myEntries = () => {
     this.setState({
