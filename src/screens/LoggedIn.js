@@ -27,10 +27,11 @@ export default class LoggedIn extends Component {
     this.props.deleteId();
   };
   newEntry = () => {
-    this.setState({
-      newEntry: true
-    });
-    console.log("new entry pressed");
+    // this.setState({
+    //   newEntry: true
+    // });
+    // console.log("new entry pressed");
+    this.props.navigation.navigate("EntryForm");
   };
   myEntries = () => {
     this.setState({
@@ -59,6 +60,7 @@ export default class LoggedIn extends Component {
             user_id={this.props.user_id}
             logout={this.logout}
             leaveScreen={this.leaveScreen}
+            navigation={this.props.navigation}
           />
         </View>
       );

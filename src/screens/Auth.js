@@ -26,6 +26,7 @@ export default class Auth extends Component {
           authSwitch={this.authSwitch}
           newJWT={this.props.newJWT}
           newId={this.props.newId}
+          navigation={this.props.navigation}
         />
       );
     } else {
@@ -34,6 +35,7 @@ export default class Auth extends Component {
           authSwitch={this.authSwitch}
           newJWT={this.props.newJWT}
           newId={this.props.newId}
+          navigation={this.props.navigation}
         />
       );
     }

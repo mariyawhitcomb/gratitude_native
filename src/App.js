@@ -7,14 +7,28 @@ import { createStackNavigator } from "react-navigation";
 import EntryForm from "./components/EntryForm";
 import MyEntries from "./components/MyEntries";
 import Home from "./Home";
+import EntryDetail from "./components/EntryDetail";
 
 export default class App extends Component {
   render() {
     const Routes = createStackNavigator({
       Home: { screen: Home },
-      LoggedIn: { screen: LoggedIn },
-      NewEntry: { screen: EntryForm },
-      MyEntries: { screen: MyEntries }
+      Auth: { screen: Auth },
+      LoggedIn: {
+        screen: LoggedIn,
+        navigationOptions: {
+          title: "Welcome to Gratitude",
+          headerBackTitle: "Back"
+        }
+      },
+      EntryForm: { screen: EntryForm },
+      MyEntries: { screen: MyEntries },
+      Detail: {
+        screen: EntryDetail,
+        navigationOptions: {
+          title: "Detail"
+        }
+      }
     });
     return <Routes />;
   }

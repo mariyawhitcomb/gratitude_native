@@ -36,11 +36,16 @@ export default class Home extends Component {
     });
   };
   render() {
-    console.log(this.state.jwt);
     if (this.state.loading) {
       return <Loading size={"large"} />;
     } else if (!this.state.jwt) {
-      return <Auth newJWT={this.newJWT} newId={this.newId} />;
+      return (
+        <Auth
+          newJWT={this.newJWT}
+          newId={this.newId}
+          navigation={this.props.navigation}
+        />
+      );
     } else if (this.state.jwt) {
       return (
         <LoggedIn
@@ -48,6 +53,7 @@ export default class Home extends Component {
           deleteId={this.deleteId}
           jwt={this.state.jwt}
           user_id={this.state.user_id}
+          navigation={this.props.navigation}
         />
       );
     }
